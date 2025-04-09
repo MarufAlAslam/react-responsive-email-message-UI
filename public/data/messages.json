@@ -1,0 +1,116 @@
+[
+    {
+        "conversationId": "conv-001",
+        "contact": {
+            "id": "user-002",
+            "name": "John Doe",
+            "avatar": "https://randomuser.me/api/portraits/men/75.jpg",
+            "phone": "+1-202-555-0123",
+            "email": "john.doe@example.com",
+            "location": "New York, USA",
+            "isOnline": false
+        },
+        "lastMessage": {
+            "content": "Great! Let me know once it's live.",
+            "timestamp": "2025-04-09T06:30:00Z",
+            "timeAgo": "4h ago",
+            "senderId": "user-002"
+        },
+        "messages": [
+            {
+                "id": "msg-001",
+                "senderId": "user-001",
+                "content": "Hey John, how's the project going?",
+                "timestamp": "2025-04-09T06:10:00Z",
+                "attachments": [],
+                "status": "seen"
+            },
+            {
+                "id": "msg-002",
+                "senderId": "user-002",
+                "content": "Great! Let me know once it's live.",
+                "timestamp": "2025-04-09T06:30:00Z",
+                "attachments": [
+                    {
+                        "type": "image",
+                        "url": "https://cdn-icons-png.flaticon.com/512/3273/3273898.png",
+                        "fileName": "demo.png"
+                    }
+                ],
+                "status": "delivered"
+            }
+        ]
+    },
+    {
+        "conversationId": "conv-002",
+        "contact": {
+            "id": "user-003",
+            "name": "+1 (832) 555-0145",
+            "avatar": "https://randomuser.me/api/portraits/women/54.jpg",
+            "phone": "+1-303-555-0145",
+            "email": "alice.smith@example.com",
+            "location": "California, USA",
+            "isOnline": true
+        },
+        "lastMessage": {
+            "content": "Let's catch up soon!",
+            "timestamp": "2025-04-09T08:15:00Z",
+            "timeAgo": "2h ago",
+            "senderId": "user-003"
+        },
+        "messages": [
+            {
+                "id": "msg-003",
+                "senderId": "user-001",
+                "content": "Hey Alice, long time no talk!",
+                "timestamp": "2025-04-09T08:05:00Z",
+                "attachments": [],
+                "status": "seen"
+            },
+            {
+                "id": "msg-004",
+                "senderId": "user-003",
+                "content": "Let's catch up soon!",
+                "timestamp": "2025-04-09T08:15:00Z",
+                "attachments": [],
+                "status": "delivered"
+            }
+        ]
+    },
+    {
+        "conversationId": "conv-003",
+        "contact": {
+            "id": "user-004",
+            "name": "Bob Williams",
+            "avatar": "https://randomuser.me/api/portraits/men/35.jpg",
+            "phone": "+1-404-555-0156",
+            "email": "bob.williams@example.com",
+            "location": "London, UK",
+            "isOnline": false
+        },
+        "lastMessage": {
+            "content": "I will get back to you soon.",
+            "timestamp": "2025-04-09T09:00:00Z",
+            "timeAgo": "1h ago",
+            "senderId": "user-004"
+        },
+        "messages": [
+            {
+                "id": "msg-005",
+                "senderId": "user-001",
+                "content": "Hey Bob, I need your help with the new feature.",
+                "timestamp": "2025-04-09T08:45:00Z",
+                "attachments": [],
+                "status": "seen"
+            },
+            {
+                "id": "msg-006",
+                "senderId": "user-004",
+                "content": "I will get back to you soon.",
+                "timestamp": "2025-04-09T09:00:00Z",
+                "attachments": [],
+                "status": "delivered"
+            }
+        ]
+    }
+]

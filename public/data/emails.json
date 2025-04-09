@@ -1,0 +1,125 @@
+[
+    {
+        "conversationId": "email-001",
+        "contact": {
+            "id": "user-002",
+            "name": "John Doe",
+            "avatar": "https://randomuser.me/api/portraits/men/75.jpg",
+            "email": "john.doe@example.com",
+            "phone": "+1-202-555-0123",
+            "location": "New York, USA",
+            "isOnline": false
+        },
+        "lastEmail": {
+            "subject": "Project Update",
+            "content": "Great! Let me know once it's live.",
+            "timestamp": "2025-04-09T06:30:00Z",
+            "timeAgo": "4h ago",
+            "senderId": "user-002"
+        },
+        "emails": [
+            {
+                "id": "email-001",
+                "senderId": "user-001",
+                "subject": "Project Update",
+                "content": "Hey John, how's the project going?",
+                "timestamp": "2025-04-09T06:10:00Z",
+                "attachments": [],
+                "status": "read"
+            },
+            {
+                "id": "email-002",
+                "senderId": "user-002",
+                "subject": "Re: Project Update",
+                "content": "Great! Let me know once it's live.",
+                "timestamp": "2025-04-09T06:30:00Z",
+                "attachments": [
+                    {
+                        "type": "image",
+                        "url": "https://cdn-icons-png.flaticon.com/512/3273/3273898.png",
+                        "fileName": "demo.png"
+                    }
+                ],
+                "status": "unread"
+            }
+        ]
+    },
+    {
+        "conversationId": "email-002",
+        "contact": {
+            "id": "user-003",
+            "name": "Alice Smith",
+            "avatar": "https://randomuser.me/api/portraits/women/54.jpg",
+            "email": "alice.smith@example.com",
+            "phone": "+1-303-555-0145",
+            "location": "California, USA",
+            "isOnline": true
+        },
+        "lastEmail": {
+            "subject": "Catch Up",
+            "content": "Let's catch up soon!",
+            "timestamp": "2025-04-09T08:15:00Z",
+            "timeAgo": "2h ago",
+            "senderId": "user-003"
+        },
+        "emails": [
+            {
+                "id": "email-003",
+                "senderId": "user-001",
+                "subject": "Catch Up",
+                "content": "Hey Alice, long time no talk!",
+                "timestamp": "2025-04-09T08:05:00Z",
+                "attachments": [],
+                "status": "read"
+            },
+            {
+                "id": "email-004",
+                "senderId": "user-003",
+                "subject": "Re: Catch Up",
+                "content": "Let's catch up soon!",
+                "timestamp": "2025-04-09T08:15:00Z",
+                "attachments": [],
+                "status": "unread"
+            }
+        ]
+    },
+    {
+        "conversationId": "email-003",
+        "contact": {
+            "id": "user-004",
+            "name": "Bob Williams",
+            "avatar": "https://randomuser.me/api/portraits/men/35.jpg",
+            "email": "bob.williams@example.com",
+            "phone": "+1-404-555-0156",
+            "location": "London, UK",
+            "isOnline": false
+        },
+        "lastEmail": {
+            "subject": "Feature Request",
+            "content": "I will get back to you soon.",
+            "timestamp": "2025-04-09T09:00:00Z",
+            "timeAgo": "1h ago",
+            "senderId": "user-004"
+        },
+        "emails": [
+            {
+                "id": "email-005",
+                "senderId": "user-001",
+                "subject": "Feature Request",
+                "content": "Hey Bob, I need your help with the new feature.",
+                "timestamp": "2025-04-09T08:45:00Z",
+                "attachments": [],
+                "status": "read"
+            },
+            {
+                "id": "email-006",
+                "senderId": "user-004",
+                "subject": "Re: Feature Request",
+                "content": "I will get back to you soon.",
+                "timestamp": "2025-04-09T09:00:00Z",
+                "attachments": [],
+                "status": "unread"
+            }
+        ]
+    }
+]
