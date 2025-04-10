@@ -3,3 +3,106 @@
 * {
   font-family: "Quicksand", sans-serif;
 }
+
+body,
+html {
+  overflow-x: hidden;
+}
+
+@media screen and (max-width: 1400px) {
+  .container {
+    max-width: 95%;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .right-panel {
+    position: absolute;
+    background: white;
+    padding-right: 60px;
+    width: 60%;
+    right: 0;
+    height: 100%;
+    top: 0;
+    transition: 0.4s;
+    transform: translateX(100%);
+  }
+
+  .left-panel {
+    width: 40%;
+  }
+
+  .middle-panel {
+    width: 60%;
+  }
+
+  .right-panel.overlapped {
+    transform: translateX(0);
+  }
+
+  button.btn.info-toggler-btn {
+    position: relative;
+    z-index: 999;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .left-panel {
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+  }
+
+  .middle-panel {
+    width: 100%;
+    padding-right: 15px;
+  }
+
+  .right-panel {
+    position: absolute;
+    background: #ece7e7;
+    padding-right: 20px;
+    width: 100%;
+    right: 0;
+    height: 400px;
+    bottom: 0;
+    transition: 0.4s;
+    transform: translateX(120%);
+    border-radius: 20px;
+    top: unset;
+    overflow-y: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    position: absolute;
+    z-index: 10;
+    background: white;
+    z-index: 99999;
+    height: 100%;
+    padding-right: 0;
+  }
+
+  .left-panel {
+    width: 100%;
+    height: auto;
+    margin-bottom: 30px;
+    position: absolute;
+    z-index: 10;
+    background: white;
+    z-index: 99999;
+    height: 100%;
+    padding-right: 0;
+    transition: 0.4s;
+    transform: translateX(-110%);
+  }
+
+  .left-panel.overlapped {
+    transform: translateX(0);
+    padding-right: 0px !important;
+    border: unset;
+  }
+}

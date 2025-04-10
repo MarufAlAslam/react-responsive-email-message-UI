@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import EmailListItem from '../../components/email-list-item';
+import { FaBars, FaChevronLeft, FaInfoCircle } from 'react-icons/fa';
 
 
 const Emails: React.FC = () => {
@@ -10,6 +11,9 @@ const Emails: React.FC = () => {
   const [attachments, setAttachments] = useState<File[]>([]);
   const [activeTab, setActiveTab] = useState<string>('detail');
   const emailEndRef = useRef<HTMLDivElement>(null);
+
+  const [infoTab, setInfoTab] = useState<boolean>(false);
+  const [chatTab, setChatTab] = useState<boolean>(false);
 
   const fetchEmails = async () => {
     const response = await fetch('/data/emails.json');
@@ -81,10 +85,13 @@ const Emails: React.FC = () => {
           <p className="text-gray-500">Loading...</p>
         </div>
       ) : (
-        <div className="flex justify-between items-start gap-3">
+        <div className="flex md:flex-row flex-col justify-between items-start gap-3 relative">
           {/* Left Panel: Email List */}
-          <div className="left-panel h-[calc(92vh-100px)] border-r border-gray-200 w-3/12 pr-4">
-            <div className="flex flex-col w-full gap-2">
+          <div className={`left-panel h-[calc(92vh-100px)] overflow-y-auto border-r border-gray-200 w-3/12 pr-4 ${chatTab ? 'overlapped' : ''}`}>
+            <button className='btn md:hidden collapse-chat-list mb-3 w-[50px] h-[50px] flex justify-center items-center rounded-full' onClick={() => setChatTab(!chatTab)}>
+              <FaChevronLeft className='text-2xl' />
+            </button>
+            <div className="flex flex-col w-full gap-2" onClick={() => setChatTab(false)}>
               {emails.map((email, index) => (
                 <EmailListItem
                   key={index}
@@ -105,10 +112,21 @@ const Emails: React.FC = () => {
               <div className='h-[calc(92vh-100px)] flex flex-col justify-between items-start'>
                 <div className="flex w-full flex-col gap-5">
                   {/* Contact Info */}
-                  <div className="border-b pb-4">
+                  <div className="border-b pb-4 flex justify-between items-center w-full">
+
                     <div className="flex justify-start items-center gap-3">
+                      {/* chat list */}
+                      <button className='btn md:hidden block chat-list-toggler' onClick={() => setChatTab(!chatTab)}>
+                        <FaBars className='text-2xl' />
+                      </button>
+                      {/* chat list */}
                       <img src={selectedEmail.contact.avatar} className="w-[60px] h-[60px] rounded-full" alt="" />
                       <h2 className="text-2xl font-bold">{selectedEmail.contact.name}</h2>
+                    </div>
+                    <div className="text-right lg:hidden block">
+                      <button className='btn info-toggler-btn' onClick={() => setInfoTab(!infoTab)}>
+                        <FaInfoCircle className='text-2xl' />
+                      </button>
                     </div>
                   </div>
 
@@ -229,7 +247,7 @@ const Emails: React.FC = () => {
           </div>
 
           {/* Right Panel: Email Sender Info */}
-          <div className="right-panel w-3/12 p-5">
+          <div className={`right-panel w-full lg:w-3/12 p-5 ${infoTab ? 'overlapped' : ''}`}>
 
             {/* Contact Info */}
             <div className="flex flex-col items-center border-b pb-4 mb-4">

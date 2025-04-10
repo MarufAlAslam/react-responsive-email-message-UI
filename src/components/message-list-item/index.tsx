@@ -16,7 +16,7 @@ const MessageListItem: React.FC<MessageListItemProps> = ({ photo, name, date, me
             className={`flex cursor-pointer w-full py-3 px-4 rounded-md justify-start items-center gap-3 ${isActive ? 'bg-blue-200' : ''}`}>
             <img src={photo} alt={name} className="w-12 h-12 rounded-full" />
             <div className="content w-full">
-                <div className="flex justify-between items-center gap-2">
+                <div className="flex justify-between items-center flex-wrap">
                     <h3 className='font-bold'>{name}</h3>
                     <p className='text-gray-400 text-sm'>{date}</p>
                 </div>
