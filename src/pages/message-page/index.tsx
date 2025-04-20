@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import MessageListItem from '../../components/message-list-item';
 import { FaBars, FaChevronLeft, FaInfoCircle } from 'react-icons/fa';
+import { Button } from '../../components/ui/button';
+import { Input } from '../../components/ui/input';
 
 const Messages: React.FC = () => {
     const [messages, setMessages] = useState<any[]>([]);
@@ -85,9 +87,9 @@ const Messages: React.FC = () => {
                 ) : (
                     <div className="flex md:flex-row flex-col justify-between items-start gap-3 relative">
                         <div className={`left-panel h-[calc(92vh-100px)] overflow-y-auto border-r border-gray-200 w-3/12 pr-4 ${chatTab ? 'overlapped' : ''}`}>
-                            <button className='btn md:hidden collapse-chat-list mb-3 w-[50px] h-[50px] flex justify-center items-center rounded-full' onClick={() => setChatTab(!chatTab)}>
+                            <Button variant={"ghost"} style={{ padding: 0 }} className='btn md:hidden collapse-chat-list mb-3 w-[50px] h-[50px] flex justify-center items-center rounded-full' onClick={() => setChatTab(!chatTab)}>
                                 <FaChevronLeft className='text-2xl' />
-                            </button>
+                            </Button>
                             <div className="flex flex-col w-full gap-2" onClick={() => setChatTab(false)}>
                                 {messages.map((message, index) => (
                                     <MessageListItem
@@ -111,17 +113,17 @@ const Messages: React.FC = () => {
                                         <div className="border-b pb-4 flex justify-between items-center w-full">
                                             <div className="flex justify-start items-center gap-3">
                                                 {/* chat list */}
-                                                <button className='btn md:hidden block chat-list-toggler' onClick={() => setChatTab(!chatTab)}>
+                                                <Button variant={"ghost"} style={{ padding: 0 }} className='btn md:hidden block chat-list-toggler' onClick={() => setChatTab(!chatTab)}>
                                                     <FaBars className='text-2xl' />
-                                                </button>
+                                                </Button>
                                                 {/* chat list */}
                                                 <img src={selectedMessage.contact.avatar} className='w-[60px] h-[60px] rounded-full' alt="" />
                                                 <h2 className="text-2xl font-bold">{selectedMessage.contact.name}</h2>
                                             </div>
                                             <div className="text-right lg:hidden block">
-                                                <button className='btn info-toggler-btn' onClick={() => setInfoTab(!infoTab)}>
+                                                <Button variant={"ghost"} style={{ padding: 0 }} className='btn info-toggler-btn' onClick={() => setInfoTab(!infoTab)}>
                                                     <FaInfoCircle className='text-2xl' />
-                                                </button>
+                                                </Button>
                                             </div>
 
                                             {/* <p className="text-sm text-gray-500">{selectedMessage.contact.email}</p> */}
@@ -192,7 +194,9 @@ const Messages: React.FC = () => {
                                                                 📄 {file.name}
                                                             </div>
                                                         )}
-                                                        <button
+                                                        <Button
+                                                            variant={"ghost"}
+                                                            style={{ padding: 0 }}
                                                             onClick={() =>
                                                                 setAttachments((prev) => prev.filter((_, i) => i !== index))
                                                             }
@@ -200,7 +204,7 @@ const Messages: React.FC = () => {
                                                             title="Remove"
                                                         >
                                                             ✖️
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 ))}
                                             </div>
@@ -210,7 +214,7 @@ const Messages: React.FC = () => {
                                             {/* Attachment Button */}
                                             <label className="cursor-pointer flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-200 transition">
                                                 📎
-                                                <input
+                                                <Input
                                                     type="file"
                                                     className="hidden"
                                                     multiple
@@ -226,7 +230,7 @@ const Messages: React.FC = () => {
                                             </label>
 
                                             {/* Text Input */}
-                                            <input
+                                            <Input
                                                 type="text"
                                                 className="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
                                                 placeholder="Type your message..."
@@ -235,12 +239,13 @@ const Messages: React.FC = () => {
                                             />
 
                                             {/* Send Button */}
-                                            <button
+                                            <Button
+                                                variant={"ghost"}
                                                 type="submit"
                                                 className="bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition"
                                             >
                                                 Send
-                                            </button>
+                                            </Button>
                                         </form>
                                     </div>
 
@@ -264,33 +269,37 @@ const Messages: React.FC = () => {
                                 </div>
 
                                 {/* Book Appointment Button */}
-                                <button
+                                <Button
                                     onClick={() => {
                                         console.log("Redirect to booking page"); // Add logic for booking
                                     }}
                                     className="bg-blue-600 text-white w-full px-4 py-2 rounded-full hover:bg-blue-500 transition"
                                 >
                                     Book an Appointment
-                                </button>
+                                </Button>
 
 
 
                                 <div className="tabs border-t border-grat-200 mt-4 flex gap-4 mb-4">
                                     {/* Tab for Details */}
-                                    <button
+                                    <Button
+                                        variant={"ghost"}
+                                        style={{ padding: 0 }}
                                         onClick={() => setActiveTab('detail')}
-                                        className={`px-4 py-2 text-lg font-semibold ${activeTab === 'detail' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
+                                        className={`px-4 py-2 text-lg rounded-none font-semibold ${activeTab === 'detail' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
                                     >
                                         Details
-                                    </button>
+                                    </Button>
 
                                     {/* Tab for Marketing */}
-                                    <button
+                                    <Button
+                                        variant={"ghost"}
+                                        style={{ padding: 0 }}
                                         onClick={() => setActiveTab('marketing')}
-                                        className={`px-4 py-2 text-lg font-semibold ${activeTab === 'marketing' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
+                                        className={`px-4 py-2 text-lg rounded-none font-semibold ${activeTab === 'marketing' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'}`}
                                     >
                                         Marketing
-                                    </button>
+                                    </Button>
                                 </div>
 
                                 {/* Tab Content */}
@@ -349,7 +358,7 @@ const Messages: React.FC = () => {
                                                 </div>
                                                 <label className="inline-flex items-center cursor-pointer">
                                                     <span className="mr-2 text-sm">Active</span>
-                                                    <input type="checkbox" className="toggle" />
+                                                    <Input type="checkbox" className="toggle" />
                                                 </label>
                                             </div>
 
@@ -365,7 +374,7 @@ const Messages: React.FC = () => {
                                                 </div>
                                                 <label className="inline-flex items-center cursor-pointer">
                                                     <span className="mr-2 text-sm">Active</span>
-                                                    <input type="checkbox" className="toggle" />
+                                                    <Input type="checkbox" className="toggle" />
                                                 </label>
                                             </div>
                                         </div>

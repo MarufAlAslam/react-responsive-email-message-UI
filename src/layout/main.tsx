@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoHome } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import Messages from "../pages/message-page";
 import Emails from "../pages/email-page";
 
@@ -30,27 +30,24 @@ const MainLayout: React.FC = () => {
         {/* main content */}
         <div className="flex flex-col gap-5">
           <nav className="flex gap-3">
-            <button
-              onClick={() => handleTabClick(1)}
-              className={`px-6 py-1 cursor-pointer rounded-md ${activeTab === 1
-                  ? "bg-black text-white"
-                  : "bg-gray-200 text-gray-800"
-                }`}
+            <NavLink
+              to="/messages"
+              // onClick={() => handleTabClick(1)}
+              className={`px-6 nav-link py-1 cursor-pointer rounded-md bg-gray-200 text-gray-800`}
             >
               Messages
-            </button>
-            <button
-              onClick={() => handleTabClick(2)}
-              className={`px-6 py-1 cursor-pointer rounded-md ${activeTab === 2
-                  ? "bg-black text-white"
-                  : "bg-gray-200 text-gray-800"
-                }`}
+            </NavLink>
+            <NavLink
+              to="/emails"
+              // onClick={() => handleTabClick(2)}
+              className={`px-6 nav-link py-1 cursor-pointer rounded-md bg-gray-200 text-gray-800`}
             >
               Emails
-            </button>
+            </NavLink>
           </nav>
           <div className="flex-grow py-4 border-t border-gray-200">
-            {activeTab === 1 ? <Messages /> : <Emails />}
+            {/* {activeTab === 1 ? <Messages /> : <Emails />} */}
+            <Outlet />
           </div>
         </div>
         {/* main content */}
