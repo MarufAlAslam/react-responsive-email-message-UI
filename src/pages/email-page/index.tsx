@@ -3,6 +3,8 @@ import EmailListItem from '../../components/email-list-item';
 import { FaBars, FaChevronLeft, FaInfoCircle } from 'react-icons/fa';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
+import MessageBubble from '../../components/message-bubble';
+import Attachment from '../../components/attachment';
 
 
 const Emails: React.FC = () => {
@@ -138,38 +140,7 @@ const Emails: React.FC = () => {
                       const isSender = email.senderId === selectedEmail.contact.id;
 
                       return (
-                        <div
-                          key={email.id}
-                          className={`flex flex-col max-w-[75%] px-4 py-2 rounded-lg ${isSender ? 'self-start bg-gray-100' : 'self-end bg-black text-white'}`}
-                        >
-                          <p className="text-sm">{email.content}</p>
-
-                          {/* Attachments */}
-                          {email.attachments && email.attachments.length > 0 && (
-                            <div className="mt-2 flex gap-2 flex-wrap">
-                              {email.attachments.map((att: any, idx: number) => (
-                                <div key={idx} className="w-32 h-32 overflow-hidden rounded">
-                                  {att.type === 'image' ? (
-                                    <img src={att.url} alt={att.fileName} className="w-full h-full object-cover" />
-                                  ) : (
-                                    <a
-                                      href={att.url}
-                                      className="text-blue-600 underline"
-                                      target="_blank"
-                                      rel="noreferrer"
-                                    >
-                                      {att.fileName}
-                                    </a>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          )}
-
-                          <span className="text-xs text-gray-400 mt-1 text-right">
-                            {new Date(email.timestamp).toLocaleString()}
-                          </span>
-                        </div>
+                        <MessageBubble msg={email} key={email.id} isSender={isSender} />
                       );
                     })}
                     <div ref={emailEndRef} />
@@ -312,20 +283,7 @@ const Emails: React.FC = () => {
                       selectedEmail?.emails
                         .flatMap((email: any) => email.attachments || [])
                         .map((att: any, idx: number) => (
-                          <div key={idx} className="w-24 h-24 overflow-hidden rounded">
-                            {att.type === 'image' ? (
-                              <img src={att.url} alt={att.fileName} className="w-full h-full object-cover" />
-                            ) : (
-                              <a
-                                href={att.url}
-                                className="text-blue-600 underline"
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                {att.fileName}
-                              </a>
-                            )}
-                          </div>
+                          <Attachment key={idx} att={att} />
                         ))
                     ) : (
                       <p className="text-sm text-gray-500">No attachments</p>
