@@ -4,6 +4,9 @@ import NotFound from '../pages/error';
 import React from 'react';
 import Messages from '../pages/message-page';
 import Emails from '../pages/email-page';
+import Automation from '../pages/automation';
+import EditAutomationPage from '../pages/edit-automation';
+import CreateAutomationPage from '../pages/create-automation';
 
 export const mainRoute = createBrowserRouter([
     {
@@ -12,6 +15,10 @@ export const mainRoute = createBrowserRouter([
         errorElement: <NotFound />,
         children: [
             {
+                path: '/',
+                element: <Messages />,
+            },
+            {
                 path: '/messages',
                 element: <Messages />,
             },
@@ -19,6 +26,18 @@ export const mainRoute = createBrowserRouter([
                 path: '/emails',
                 element: <Emails />,
             },
+            {
+                path: '/automation',
+                element: <Automation />,
+            },
+            {
+                path: '/automation/create',
+                element: <CreateAutomationPage />,
+            },
+            {
+                path: '/automation/:id',
+                element: <EditAutomationPage />,
+            }
         ]
     },
     {

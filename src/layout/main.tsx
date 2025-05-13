@@ -16,7 +16,7 @@ const MainLayout: React.FC = () => {
     <main>
       <div className="container mx-auto">
         {/* header */}
-        <header className="header border-b border-gray-200 mb-5 py-4">
+        <header className="header border-b border-gray-200 py-4">
           <Link
             to="/"
             className="flex justify-start items-center gap-3 text-lg font-bold text-gray-800"
@@ -29,7 +29,7 @@ const MainLayout: React.FC = () => {
 
         {/* main content */}
         <div className="flex flex-col gap-5">
-          <nav className="flex gap-3">
+          {/* <nav className="flex gap-3">
             <NavLink
               to="/messages"
               // onClick={() => handleTabClick(1)}
@@ -44,8 +44,8 @@ const MainLayout: React.FC = () => {
             >
               Emails
             </NavLink>
-          </nav>
-          <div className="flex-grow py-4 border-t border-gray-200">
+          </nav> */}
+          <div className="flex-grow py-4 border-gray-200">
             {/* {activeTab === 1 ? <Messages /> : <Emails />} */}
             <Outlet />
           </div>
