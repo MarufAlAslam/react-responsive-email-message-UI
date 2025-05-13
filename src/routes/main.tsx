@@ -36,7 +36,7 @@ export const mainRoute = createBrowserRouter([
                 element: <CreateAutomationPage />,
             },
             {
-                path: '/automation/:id',
+                path: '/automation/edit/:id',
                 element: <EditAutomationPage />,
             },
             {

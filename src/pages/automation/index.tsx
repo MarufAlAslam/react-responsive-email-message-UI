@@ -93,9 +93,9 @@ export default function Automation() {
     };
     return (
         <div className="space-y-4">
-            <div className="flex justify-between items-center gap-2">
+            <div className="flex md:flex-row flex-col justify-between items-start md:items-center gap-2">
                 <h1 className="text-2xl font-bold mb-4">Automation Dashboard</h1>
-                <Link to="/automation/create" className="btn bg-black text-white hover:bg-gray-800 px-5 py-2 rounded-md">
+                <Link to="/automation/create" className="btn bg-black md:mb-0 mb-6 text-white hover:bg-gray-800 px-5 py-2 rounded-md">
                     Create Automation
                 </Link>
             </div>
