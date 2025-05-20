@@ -30,6 +30,8 @@ interface Automation {
 
 const defaultMessage = `Hi {{customer.first_name}}, thank you for visiting {{Business Name}} for your {{service name}}. We just wanted to check in to see if everything met your expectations. If there’s anything we can do to improve your experience, please feel free to let us know. Looking forward to serving you again!`;
 
+const defaultAiMessage = `Hi {{customer.first_name}}, thank you for visiting {{Business Name}} for your {{service name}}. We just wanted to check in to see if everything met your expectations. If there’s anything we can do to improve your experience, please feel free to let us know. Looking forward to serving you again!`;
+
 const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => {
     const [step, setStep] = React.useState<"settings" | "review">("settings");
     const [sendSms, setSendSms] = React.useState(true);
@@ -42,6 +44,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
 
 
     const [message, setMessage] = React.useState(defaultMessage);
+    const [aiMessage, setAiMessage] = React.useState(defaultAiMessage);
 
     const handleNext = () => setStep("review");
     const handleBack = () => setStep("settings");
@@ -61,12 +64,12 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
         setStep("settings");
     };
 
-    const getParsedMessage = () => {
-        return message
-            .replace(/{{customer.first_name}}/g, customerName)
-            .replace(/{{Business Name}}/g, businessName)
-            .replace(/{{service name}}/g, serviceName);
-    };
+    // const getParsedMessage = () => {
+    //     return message
+    //         .replace(/{{customer.first_name}}/g, customerName)
+    //         .replace(/{{Business Name}}/g, businessName)
+    //         .replace(/{{service name}}/g, serviceName);
+    // };
 
     return (
         <Dialog open={open} onOpenChange={onClose}>
@@ -90,14 +93,77 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                 placeholder="Enter automation name"
                             />
                         </div>
+                        <div className="flex flex-col">
+                            <Label htmlFor="automationTitle">Select Service</Label>
+                            <select
+                                id="service"
+                                value={serviceName}
+                                onChange={(e) => setServiceName(e.target.value)}
+                                className="border mt-3 rounded px-2 py-1"
+                            >
+                                <option value="Consultation">Consultation</option>
+                                <option value="Follow-up">Follow-up</option>
+                                <option value="Feedback">Feedback</option>
+                                <option value="Appointment">Appointment</option>
+                                <option value="Reminder">Reminder</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
                         <div className="flex justify-start gap-4 items-center">
                             <Label htmlFor="sms">Send SMS</Label>
+                            <select name="sms-time" id="">
+                                {[...Array(24)].map((_, i) => (
+                                    <option key={i} value={i + 1}>
+                                        {i + 1}
+                                    </option>
+                                ))}
+                            </select>
+                            <select name="period" id="">
+                                <option value="hours">Hours</option>
+                                <option value="days">Days</option>
+                                <option value="weeks">Weeks</option>
+                                <option value="months">Months</option>
+                            </select>
+                            <select name="name" id="">
+                                <option value=""></option>
+                                <option value="last-visit">After Last Visit</option>
+                                <option value="last-invoice">After Last Invoice</option>
+                                <option value="last-estimate">After Last Estimate</option>
+                                <option value="next-appointment">Before Next Appointment</option>
+                                <option value="last-appointment">After Last Appointment</option>
+                            </select>
                             <Switch id="sms" checked={sendSms} onCheckedChange={setSendSms} />
                         </div>
+
                         <div className="flex justify-start gap-4 items-center">
                             <Label htmlFor="email">Send Email</Label>
+                            <select name="sms-time" id="">
+                                {[...Array(24)].map((_, i) => (
+                                    <option key={i} value={i + 1}>
+                                        {i + 1}
+                                    </option>
+                                ))}
+                            </select>
+                            <select name="period" id="">
+                                <option value="hours">Hours</option>
+                                <option value="days">Days</option>
+                                <option value="weeks">Weeks</option>
+                                <option value="months">Months</option>
+                            </select>
+                            <select name="name" id="">
+                                <option value=""></option>
+                                <option value="last-visit">After Last Visit</option>
+                                <option value="last-invoice">After Last Invoice</option>
+                                <option value="last-estimate">After Last Estimate</option>
+                                <option value="next-appointment">Before Next Appointment</option>
+                                <option value="last-appointment">After Last Appointment</option>
+                            </select>
                             <Switch id="email" checked={sendEmail} onCheckedChange={setSendEmail} />
                         </div>
+
+                        <p className="bg-red-100 py-2 px-3 rounded-lg text-red-600 text-sm">
+                            if you choose the blank option, and set the frequency to 4 months, the message will be sent every 4 months from the creation date of the automation
+                        </p>
                         <div className="flex justify-start gap-4 items-center">
                             <Label htmlFor="businessHours">Send During Business Hours</Label>
                             <Switch
@@ -119,29 +185,6 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                         {/* Left: Editor */}
                         <div className="flex md:flex-row flex-col justify-between items-start gap-3">
                             <div className="form flex flex-col gap-3">
-                                <div className="flex flex-col">
-                                    <Label htmlFor="customerName">Customer First Name</Label>
-                                    <input
-                                        id="customerName"
-                                        type="text"
-                                        value={customerName}
-                                        onChange={(e) => setCustomerName(e.target.value)}
-                                        className="border mt-2 rounded px-2 py-1"
-                                        placeholder="Enter customer first name"
-                                    />
-                                </div>
-
-                                <div className="flex flex-col mt-2">
-                                    <Label htmlFor="businessName">Business Name</Label>
-                                    <input
-                                        id="businessName"
-                                        type="text"
-                                        value={businessName}
-                                        onChange={(e) => setBusinessName(e.target.value)}
-                                        className="border mt-2 rounded px-2 py-1"
-                                        placeholder="Enter business name"
-                                    />
-                                </div>
 
                                 <div className="flex flex-col mt-2">
                                     <Label htmlFor="serviceName">Service Name</Label>
@@ -151,6 +194,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                         value={serviceName}
                                         onChange={(e) => setServiceName(e.target.value)}
                                         className="border mt-3 rounded px-2 py-1"
+                                        disabled
                                         placeholder="Enter service name"
                                     />
                                 </div>
@@ -164,6 +208,24 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                         onChange={(e) => setMessage(e.target.value)}
                                     />
                                 </div>
+                                <div className="w-full">
+                                    <Label htmlFor="ai_message" className="mb-2 block">
+                                        please simply tell us what you want to message your customers. Our AI will draft the message for you <br /> <br />
+                                        for example: <b>Tire rotation reminder</b>
+                                    </Label>
+                                    <Textarea
+                                        id="message"
+                                        className="min-h-[200px]"
+                                        value={aiMessage}
+                                        onChange={(e) => setAiMessage(e.target.value)}
+                                    />
+                                    {/* note: ai generated message */}
+                                    <p className="text-sm text-gray-500 mt-2">
+                                        <b>Note:</b> This is an AI generated message, please edit it to your liking
+                                    </p>
+                                </div>
+
+
                             </div>
 
 
@@ -176,19 +238,23 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                     </div>
                                 </div> */}
 
-                                <div className="w-[300px] ml-auto h-[500px] border-4 border-black relative rounded-3xl bg-black/5 p-4 pb-2 flex flex-col justify-end">
-                                    <div className="notch h-[25px] w-[150px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-2xl">
-                                        <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-1 left-2/3 -translate-x-2/3 rounded-full"></div>
-                                        <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-1 left-1/3 -translate-x-1/3 rounded-full"></div>
-                                    </div>
-                                    {/* Message bubble */}
-                                    <div className="max-w-[80%] text-sm ml-auto bg-blue-600 text-white rounded-lg rounded-br-none p-3 shadow-md whitespace-pre-wrap">
-                                        {/* {message} */}
-                                        {getParsedMessage()}
+                                <div className="w-[270px] ml-auto h-[500px] border-6 border-b-12 border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-4 pb-2 flex flex-col justify-end overflow-hidden">
+                                    {/* Notch */}
+                                    <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner">
+                                        <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>
+                                        <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-1/3 -translate-x-1/3 rounded-full shadow-sm"></div>
                                     </div>
 
-                                    <div className="widget-button w-[80px] rounded-4xl mt-4 mx-auto h-[4px] bg-gray-400"></div>
+                                    {/* Chat Bubble */}
+                                    <div className="max-w-[90%] text-sm ml-auto bg-blue-600 text-white rounded-lg rounded-br-none p-3 shadow-md whitespace-pre-wrap">
+                                        {message}
+                                        {/* {getParsedMessage()} */}
+                                    </div>
+
+                                    {/* Home Button */}
+                                    <div className="widget-button w-[60px] rounded-4xl mt-4 mx-auto h-[4px] bg-gray-400"></div>
                                 </div>
+
                             </div>
                         </div>
 

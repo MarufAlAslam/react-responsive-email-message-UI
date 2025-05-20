@@ -62,6 +62,16 @@ const EditAutomationModal: React.FC<Props> = ({
 
                 {step === "settings" && (
                     <div className="space-y-4 py-4">
+                        <div className="flex flex-col">
+                            <Label htmlFor="automationTitle">Automation Name</Label>
+                            <input
+                                id="automationTitle"
+                                type="text"
+                                value={"automation name"}
+                                className="border mt-3 rounded px-2 py-1"
+                                placeholder="Enter automation name"
+                            />
+                        </div>
                         <div className="flex justify-start gap-4 items-center">
                             <Label htmlFor="sms">Send SMS</Label>
                             <Switch
@@ -93,13 +103,26 @@ const EditAutomationModal: React.FC<Props> = ({
                             <Switch id="businessHours" />
                         </div>
 
-                        <div className="flex justify-end gap-2 pt-4">
-                            <Button variant="outline" onClick={onClose}>
-                                Cancel
+                        <div className="flex justify-between items-center gap-3">
+                            {/* delete button */}
+                            <Button
+                                variant="destructive"
+                                onClick={() => {
+                                    console.log("Delete automation");
+                                    onClose();
+                                }}
+                            >
+                                Delete Automation
                             </Button>
-                            <Button onClick={() => setStep("review")}>
-                                Review Message
-                            </Button>
+
+                            <div className="flex justify-end gap-2 pt-4">
+                                <Button variant="outline" onClick={onClose}>
+                                    Cancel
+                                </Button>
+                                <Button onClick={() => setStep("review")}>
+                                    Review Message
+                                </Button>
+                            </div>
                         </div>
                     </div>
                 )}
@@ -124,16 +147,21 @@ const EditAutomationModal: React.FC<Props> = ({
                             {/* <div className="border rounded-md p-4 h-full bg-muted text-muted-foreground whitespace-pre-wrap">
                 {message}
               </div> */}
-                            <div className="w-[300px] ml-auto h-[500px] border-4 border-black relative rounded-3xl bg-black/5 p-4 pb-2 flex flex-col justify-end">
-                                <div className="notch h-[25px] w-[150px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-2xl">
-                                    <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-1 left-2/3 -translate-x-2/3 rounded-full"></div>
-                                    <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-1 left-1/3 -translate-x-1/3 rounded-full"></div>
+                            <div className="w-[270px] ml-auto h-[500px] border-6 border-b-12 border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-4 pb-2 flex flex-col justify-end overflow-hidden">
+                                {/* Notch */}
+                                <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner">
+                                    <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>
+                                    <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-1/3 -translate-x-1/3 rounded-full shadow-sm"></div>
                                 </div>
-                                {/* Message bubble */}
-                                <div className="max-w-[80%] text-sm ml-auto bg-blue-600 text-white rounded-lg rounded-br-none p-3 shadow-md whitespace-pre-wrap">
+
+                                {/* Chat Bubble */}
+                                <div className="max-w-[90%] text-sm ml-auto bg-blue-600 text-white rounded-lg rounded-br-none p-3 shadow-md whitespace-pre-wrap">
                                     {message}
+                                    {/* {getParsedMessage()} */}
                                 </div>
-                                <div className="widget-button w-[80px] rounded-4xl mt-4 mx-auto h-[4px] bg-gray-400"></div>
+
+                                {/* Home Button */}
+                                <div className="widget-button w-[60px] rounded-4xl mt-4 mx-auto h-[4px] bg-gray-400"></div>
                             </div>
 
                         </div>
