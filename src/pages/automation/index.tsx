@@ -222,6 +222,10 @@ export default function Automation() {
         setModalOpen(true);
     };
 
+    const deleteAutomation = (id: number) => {
+        setAutomations((prev) => prev.filter((automation) => automation.id !== id));
+    }
+
     return (
         <div className="space-y-4">
             <div className="flex md:flex-row flex-col justify-between items-start md:items-center gap-2">
@@ -297,6 +301,13 @@ export default function Automation() {
                 }}
                 automation={selectedAutomation}
                 setAutomation={setSelectedAutomation}
+                onDelete={() => {
+                    if (selectedAutomation) {
+                        deleteAutomation(selectedAutomation.id);
+                        setModalOpen(false);
+                        setSelectedAutomation(null);
+                    }
+                }}
             />
 
             <CreateAutomationModal

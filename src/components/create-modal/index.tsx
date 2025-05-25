@@ -38,9 +38,10 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
     const [sendEmail, setSendEmail] = React.useState(false);
     const [duringBusinessHours, setDuringBusinessHours] = React.useState(false);
     const [automationTitle, setAutomationTitle] = React.useState("New Automation");
-    const [customerName, setCustomerName] = React.useState("John");
-    const [businessName, setBusinessName] = React.useState("Acme Corp");
+    // const [customerName, setCustomerName] = React.useState("John");
+    // const [businessName, setBusinessName] = React.useState("Acme Corp");
     const [serviceName, setServiceName] = React.useState("Consultation");
+
 
 
     const [message, setMessage] = React.useState(defaultMessage);
@@ -62,6 +63,10 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
         onCreate(newAutomation);
         onClose();
         setStep("settings");
+
+        // clear form fields
+        setAutomationTitle("New Automation");
+        setSendSms(true);
     };
 
     // const getParsedMessage = () => {
@@ -175,7 +180,9 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
 
                         <div className="flex justify-end gap-2 pt-4">
                             <Button variant="outline" onClick={onClose}>Cancel</Button>
-                            <Button onClick={handleNext}>Review Message</Button>
+                            <Button
+                                disabled={!sendSms && !sendEmail}
+                                onClick={handleNext}>Review Message</Button>
                         </div>
                     </div>
                 )}

@@ -5,8 +5,6 @@ import React from 'react';
 import Messages from '../pages/message-page';
 import Emails from '../pages/email-page';
 import Automation from '../pages/automation';
-import EditAutomationPage from '../pages/edit-automation';
-import CreateAutomationPage from '../pages/create-automation';
 import ReviewRequestAutomationPage from '../pages/review-request';
 
 export const mainRoute = createBrowserRouter([
@@ -30,14 +28,6 @@ export const mainRoute = createBrowserRouter([
             {
                 path: '/automation',
                 element: <Automation />,
-            },
-            {
-                path: '/automation/create',
-                element: <CreateAutomationPage />,
-            },
-            {
-                path: '/automation/edit/:id',
-                element: <EditAutomationPage />,
             },
             {
                 path: '/review-request',

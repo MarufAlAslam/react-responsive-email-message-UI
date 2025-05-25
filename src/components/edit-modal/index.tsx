@@ -25,6 +25,7 @@ interface Props {
     onClose: () => void;
     automation: Automation | null;
     setAutomation: React.Dispatch<React.SetStateAction<Automation | null>>;
+    onDelete: () => void;
 }
 
 const EditAutomationModal: React.FC<Props> = ({
@@ -32,6 +33,7 @@ const EditAutomationModal: React.FC<Props> = ({
     onClose,
     automation,
     setAutomation,
+    onDelete,
 }) => {
     const [step, setStep] = React.useState<"settings" | "review">("settings");
     const [message, setMessage] = React.useState("");
@@ -110,6 +112,7 @@ const EditAutomationModal: React.FC<Props> = ({
                                 onClick={() => {
                                     console.log("Delete automation");
                                     onClose();
+                                    onDelete();
                                 }}
                             >
                                 Delete Automation
