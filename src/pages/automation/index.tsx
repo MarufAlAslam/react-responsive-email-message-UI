@@ -230,7 +230,7 @@ export default function Automation() {
         <div className="space-y-4">
             <div className="flex md:flex-row flex-col justify-between items-start md:items-center gap-2">
                 <h1 className="text-2xl font-bold mb-4">Automation Dashboard</h1>
-                <Button onClick={() => setCreateModalOpen(true)} asChild className="bg-black text-white hover:bg-gray-800 px-5 py-2 rounded-md">
+                <Button onClick={() => setCreateModalOpen(true)} asChild className="bg-black text-white hover:bg-gray-800 px-5 py-2 rounded-md cursor-pointer">
                     <a>Create Automation</a>
                 </Button>
             </div>

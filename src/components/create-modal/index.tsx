@@ -11,6 +11,7 @@ import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
+import { FaUser } from "react-icons/fa";
 
 interface Props {
     open: boolean;
@@ -33,9 +34,10 @@ const defaultMessage = `Hi {{customer.first_name}}, thank you for visiting {{Bus
 const defaultAiMessage = `Hi {{customer.first_name}}, thank you for visiting {{Business Name}} for your {{service name}}. We just wanted to check in to see if everything met your expectations. If there’s anything we can do to improve your experience, please feel free to let us know. Looking forward to serving you again!`;
 
 const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => {
-    const [step, setStep] = React.useState<"settings" | "review">("settings");
+    const [step, setStep] = React.useState<"settings" | "review" | "preview">("settings");
     const [sendSms, setSendSms] = React.useState(true);
     const [sendEmail, setSendEmail] = React.useState(false);
+    const [toggledView, setToggledView] = React.useState<"sms" | "email">("sms");
     const [duringBusinessHours, setDuringBusinessHours] = React.useState(false);
     const [automationTitle, setAutomationTitle] = React.useState("New Automation");
     // const [customerName, setCustomerName] = React.useState("John");
@@ -180,6 +182,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
 
                         <div className="flex justify-end gap-2 pt-4">
                             <Button variant="outline" onClick={onClose}>Cancel</Button>
+                            {/* <Button variant="secondary" onClick={() => setStep("preview")}>Toggle Preview</Button> */}
                             <Button
                                 disabled={!sendSms && !sendEmail}
                                 onClick={handleNext}>Review Message</Button>
@@ -206,15 +209,28 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                     />
                                 </div>
 
-                                <div className="w-full">
-                                    <Label htmlFor="message" className="mb-2 block">Edit Message</Label>
-                                    <Textarea
-                                        id="message"
-                                        className="min-h-[200px]"
-                                        value={message}
-                                        onChange={(e) => setMessage(e.target.value)}
-                                    />
-                                </div>
+                                {
+                                    sendSms && <div className="w-full">
+                                        <Label htmlFor="message" className="mb-2 block">Edit Message</Label>
+                                        <Textarea
+                                            id="message"
+                                            className="min-h-[100px]"
+                                            value={message}
+                                            onChange={(e) => setMessage(e.target.value)}
+                                        />
+                                    </div>
+                                }
+                                {
+                                    sendEmail && <div className="w-full">
+                                        <Label htmlFor="message" className="mb-2 block">Edit Email</Label>
+                                        <Textarea
+                                            id="message"
+                                            className="min-h-[100px]"
+                                            value={message}
+                                            onChange={(e) => setMessage(e.target.value)}
+                                        />
+                                    </div>
+                                }
                                 <div className="w-full">
                                     <Label htmlFor="ai_message" className="mb-2 block">
                                         please simply tell us what you want to message your customers. Our AI will draft the message for you <br /> <br />
@@ -222,7 +238,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                     </Label>
                                     <Textarea
                                         id="message"
-                                        className="min-h-[200px]"
+                                        className="min-h-[100px]"
                                         value={aiMessage}
                                         onChange={(e) => setAiMessage(e.target.value)}
                                     />
@@ -245,23 +261,62 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                     </div>
                                 </div> */}
 
-                                <div className="w-[270px] ml-auto h-[500px] border-6 border-b-12 border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-4 pb-2 flex flex-col justify-end overflow-hidden">
-                                    {/* Notch */}
-                                    <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner">
-                                        <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>
-                                        <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-1/3 -translate-x-1/3 rounded-full shadow-sm"></div>
+                                {
+                                    toggledView === "sms" ? <div className="w-[270px] ml-auto h-[500px] border-6 border-b-12 border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-4 pb-2 flex flex-col justify-end overflow-hidden">
+                                        {/* Notch */}
+                                        <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner">
+                                            <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>
+                                            <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-1/3 -translate-x-1/3 rounded-full shadow-sm"></div>
+                                        </div>
+
+                                        {/* Chat Bubble */}
+                                        <div className="max-w-[90%] text-sm ml-auto bg-blue-600 text-white rounded-lg rounded-br-none p-3 shadow-md whitespace-pre-wrap">
+                                            {message}
+                                            {/* {getParsedMessage()} */}
+                                        </div>
+
+                                        {/* Home Button */}
+                                        <div className="widget-button w-[60px] rounded-4xl mt-4 mx-auto h-[4px] bg-gray-400"></div>
                                     </div>
+                                        :
+                                        <div className="w-[270px] pt-6 h-[500px] border-[6px] border-b-[12px] border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col">
+                                            <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner z-10">
+                                                <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>
+                                                <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-1/3 -translate-x-1/3 rounded-full shadow-sm"></div>
+                                            </div>
+                                            <div className="p-3 text-xs overflow-y-auto">
+                                                <h2 className="text-base font-semibold mb-1">Welcome to Auto Shop</h2>
+                                                <p className="text-gray-500 text-xs mb-2">
+                                                    <FaUser className="inline bg-gray-100 w-[30px] h-[30px] p-2 rounded-full mr-2" />
+                                                    no-reply · to me · Dec 8, 2024</p>
+                                                <div className="bg-gray-100 p-2 rounded mb-2">
+                                                    <p className="mb-2">{aiMessage}</p>
+                                                    <p className="text-blue-600 underline mb-1 cursor-pointer">Explore 600+ free digital courses</p>
+                                                    <p className="text-blue-600 underline mb-1 cursor-pointer">Discover Learning Plans developed by AWS Experts</p>
+                                                    <p className="text-blue-600 underline cursor-pointer">Contact us</p>
+                                                </div>
+                                                <p className="text-[10px] text-gray-400 mt-2 leading-snug">
+                                                    Amazon Web Services, Inc. is a subsidiary of Amazon.com, Inc. This message was produced and distributed by Amazon Web Services Inc.
+                                                </p>
+                                            </div>
+                                            <div className="widget-button w-[60px] rounded-4xl mt-auto mb-2 mx-auto h-[4px] bg-gray-400"></div>
+                                        </div>
+                                }
 
-                                    {/* Chat Bubble */}
-                                    <div className="max-w-[90%] text-sm ml-auto bg-blue-600 text-white rounded-lg rounded-br-none p-3 shadow-md whitespace-pre-wrap">
-                                        {message}
-                                        {/* {getParsedMessage()} */}
-                                    </div>
 
-                                    {/* Home Button */}
-                                    <div className="widget-button w-[60px] rounded-4xl mt-4 mx-auto h-[4px] bg-gray-400"></div>
-                                </div>
-
+                                {/* toggler for sms/email */}
+                                {
+                                    sendSms && sendEmail &&
+                                    <Button
+                                        variant="outline"
+                                        className="mt-4"
+                                        onClick={() => {
+                                            setToggledView(toggledView === "sms" ? "email" : "sms");
+                                        }}
+                                    >
+                                        {toggledView === "sms" ? "Toggle Email" : "Toggle SMS"}
+                                    </Button>
+                                }
                             </div>
                         </div>
 
@@ -274,6 +329,8 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                         </div>
                     </div>
                 )}
+
+
             </DialogContent>
         </Dialog>
     );
