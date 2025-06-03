@@ -47,6 +47,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
 
 
     const [message, setMessage] = React.useState(defaultMessage);
+    const [email, setEmail] = React.useState(defaultMessage);
     const [aiMessage, setAiMessage] = React.useState(defaultAiMessage);
 
     const handleNext = () => setStep("review");
@@ -77,6 +78,21 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
     //         .replace(/{{Business Name}}/g, businessName)
     //         .replace(/{{service name}}/g, serviceName);
     // };
+
+
+    const handleClose = () => {
+        // Reset state when closing the modal
+        setStep("settings");
+        setSendSms(true);
+        setSendEmail(false);
+        setToggledView("sms");
+        setDuringBusinessHours(false);
+        setAutomationTitle("New Automation");
+        setServiceName("Consultation");
+        setMessage(defaultMessage);
+        setAiMessage(defaultAiMessage);
+        onClose();
+    };
 
     return (
         <Dialog open={open} onOpenChange={onClose}>
@@ -181,7 +197,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                         </div>
 
                         <div className="flex justify-end gap-2 pt-4">
-                            <Button variant="outline" onClick={onClose}>Cancel</Button>
+                            <Button variant="outline" onClick={handleClose}>Cancel</Button>
                             {/* <Button variant="secondary" onClick={() => setStep("preview")}>Toggle Preview</Button> */}
                             <Button
                                 disabled={!sendSms && !sendEmail}
@@ -194,7 +210,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                     <div className="flex flex-col gap-6 pt-4">
                         {/* Left: Editor */}
                         <div className="flex md:flex-row flex-col justify-between items-start gap-3">
-                            <div className="form flex flex-col gap-3">
+                            <div className="form flex flex-col gap-3 w-full md:w-2/3">
 
                                 <div className="flex flex-col mt-2">
                                     <Label htmlFor="serviceName">Service Name</Label>
@@ -207,6 +223,28 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                         disabled
                                         placeholder="Enter service name"
                                     />
+                                </div>
+                                <div className="flex flex-col mt-2">
+                                    <Label htmlFor="serviceName">AI Message</Label>
+                                    <input
+                                        id="serviceName"
+                                        type="text"
+                                        className="border mt-3 rounded px-2 py-1"
+                                        placeholder="Enter your prompt for AI to generate message"
+                                    />
+                                    <p className="text-sm my-2">
+                                        Tell us what you'd like to message your customers, then click the button below. Our AI will generate a personalized message for you. Example: "Remind customers about tire rotation every 6 months"
+                                    </p>
+
+                                    <Button
+                                        variant="default"
+                                        className="w-auto"
+                                        onClick={() => {
+                                            setAiMessage(`Hi {{customer.first_name}}, thank you for visiting {{Business Name}} for your ${serviceName}. We just wanted to check in to see if everything met your expectations. If there’s anything we can do to improve your experience, please feel free to let us know. Looking forward to serving you again!`);
+                                        }}
+                                    >
+                                        Generate AI Message
+                                    </Button>
                                 </div>
 
                                 {
@@ -222,12 +260,12 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                 }
                                 {
                                     sendEmail && <div className="w-full">
-                                        <Label htmlFor="message" className="mb-2 block">Edit Email</Label>
+                                        <Label htmlFor="email" className="mb-2 block">Edit Email</Label>
                                         <Textarea
-                                            id="message"
+                                            id="email"
                                             className="min-h-[100px]"
-                                            value={message}
-                                            onChange={(e) => setMessage(e.target.value)}
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
                                 }
@@ -253,7 +291,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
 
 
                             {/* Right: Preview */}
-                            <div className="w-full md:w-1/2">
+                            <div className="w-full md:w-1/3">
                                 {/* <Label className="mb-2 block">Message Preview</Label> */}
                                 {/* <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm min-h-[200px]">
                                     <div className="text-sm text-gray-700 whitespace-pre-wrap">
@@ -290,7 +328,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                                     <FaUser className="inline bg-gray-100 w-[30px] h-[30px] p-2 rounded-full mr-2" />
                                                     no-reply · to me · Dec 8, 2024</p>
                                                 <div className="bg-gray-100 p-2 rounded mb-2">
-                                                    <p className="mb-2">{aiMessage}</p>
+                                                    <p className="mb-2">{email}</p>
                                                     <p className="text-blue-600 underline mb-1 cursor-pointer">Explore 600+ free digital courses</p>
                                                     <p className="text-blue-600 underline mb-1 cursor-pointer">Discover Learning Plans developed by AWS Experts</p>
                                                     <p className="text-blue-600 underline cursor-pointer">Contact us</p>
@@ -323,7 +361,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                         <div className="w-full flex justify-between items-center pt-4">
                             <Button variant="outline" onClick={handleBack}>Back</Button>
                             <div className="flex gap-2">
-                                <Button variant="outline" onClick={onClose}>Cancel</Button>
+                                <Button variant="outline" onClick={handleClose}>Cancel</Button>
                                 <Button onClick={handleSave}>Create Automation</Button>
                             </div>
                         </div>
