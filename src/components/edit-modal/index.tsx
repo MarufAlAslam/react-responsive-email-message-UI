@@ -208,33 +208,23 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                         <div className="flex md:flex-row flex-col justify-between items-start gap-3">
                             <div className="form flex flex-col gap-3 w-full md:w-2/3">
 
+                               
                                 <div className="flex flex-col mt-2">
-                                    <Label htmlFor="serviceName">Service Name</Label>
-                                    <input
-                                        id="serviceName"
-                                        type="text"
-                                        value={serviceName}
-                                        onChange={(e) => setServiceName(e.target.value)}
-                                        className="border mt-3 rounded px-2 py-1"
-                                        disabled
-                                        placeholder="Enter service name"
-                                    />
-                                </div>
-                                <div className="flex flex-col mt-2">
-                                    <Label htmlFor="serviceName">AI Message</Label>
+                                    {/* <Label htmlFor="serviceName">AI Message</Label> */}
+                                    <p className="text-sm my-2">
+                                        Tell us what you'd like to message your customers, then click the button below. Our AI will generate a personalized message for you. Example: "Remind customers about tire rotation every 6 months"
+                                    </p>
                                     <input
                                         id="serviceName"
                                         type="text"
                                         className="border mt-3 rounded px-2 py-1"
                                         placeholder="Enter your prompt for AI to generate message"
                                     />
-                                    <p className="text-sm my-2">
-                                        Tell us what you'd like to message your customers, then click the button below. Our AI will generate a personalized message for you. Example: "Remind customers about tire rotation every 6 months"
-                                    </p>
+                                    
 
                                     <Button
                                         variant="default"
-                                        className="w-auto"
+                                        className="w-auto mt-4"
                                         onClick={() => {
                                             setAiMessage(`Hi {{customer.first_name}}, thank you for visiting {{Business Name}} for your ${serviceName}. We just wanted to check in to see if everything met your expectations. If there’s anything we can do to improve your experience, please feel free to let us know. Looking forward to serving you again!`);
                                         }}
@@ -259,23 +249,13 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                                         <Label htmlFor="email" className="mb-2 block">Edit Email</Label>
                                         <Textarea
                                             id="email"
-                                            className="min-h-[100px]"
+                                            className="min-h-[200px]"
                                             value={email}
                                             onChange={(e) => setEmail(e.target.value)}
                                         />
                                     </div>
                                 }
                                 <div className="w-full">
-                                    <Label htmlFor="ai_message" className="mb-2 block">
-                                        please simply tell us what you want to message your customers. Our AI will draft the message for you <br /> <br />
-                                        for example: <b>Tire rotation reminder</b>
-                                    </Label>
-                                    <Textarea
-                                        id="message"
-                                        className="min-h-[100px]"
-                                        value={aiMessage}
-                                        onChange={(e) => setAiMessage(e.target.value)}
-                                    />
                                     {/* note: ai generated message */}
                                     <p className="text-sm text-gray-500 mt-2">
                                         <b>Note:</b> This is an AI generated message, please edit it to your liking
@@ -313,7 +293,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                                         <div className="widget-button w-[60px] rounded-4xl mt-4 mx-auto h-[4px] bg-gray-400"></div>
                                     </div>
                                         :
-                                        <div className="w-[270px] pt-6 h-[500px] border-[6px] border-b-[12px] border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col">
+                                        <div className="w-[270px] ml-auto pt-6 h-[500px] border-[6px] border-b-[12px] border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col">
                                             <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner z-10">
                                                 <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>
                                                 <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-1/3 -translate-x-1/3 rounded-full shadow-sm"></div>
@@ -343,7 +323,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                                     sendSms && sendEmail &&
                                     <Button
                                         variant="outline"
-                                        className="mt-4"
+                                        className="mt-4 ml-7"
                                         onClick={() => {
                                             setToggledView(toggledView === "sms" ? "email" : "sms");
                                         }}
