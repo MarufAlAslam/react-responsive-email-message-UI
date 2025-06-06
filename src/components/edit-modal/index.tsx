@@ -80,16 +80,16 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
 
     return (
         <Dialog open={open} onOpenChange={onClose}>
-            <DialogContent className="md:max-w-5xl md:min-w-5xl md:h-auto h-[90vh] overflow-y-auto">
-                <DialogHeader>
+            <DialogContent className="lg:max-w-5xl lg:min-w-5xl min-w-[95%] max-w-full lg:w-full w-[95vw] md:h-auto h-[90vh] overflow-y-auto">
+                <DialogHeader className="text-left">
                     <DialogTitle>
                         {step === "settings" ? "Edit Automation" : "Review Message"}
                     </DialogTitle>
                 </DialogHeader>
 
                 {step === "settings" && (
-                    <div className="space-y-4 py-4">
-                        <div className="flex flex-col">
+                    <div className="space-y-4 py-4 w-full">
+                        <div className="flex flex-col w-full">
                             <Label htmlFor="automationTitle">Automation Name</Label>
                             <input
                                 id="automationTitle"
@@ -116,7 +116,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                        <div className="flex justify-start gap-4 items-center">
+                        <div className="flex justify-start gap-4 items-center flex-wrap">
                             <Label htmlFor="sms">Send SMS</Label>
                             <select name="sms-time" id="">
                                 {[...Array(24)].map((_, i) => (
@@ -142,7 +142,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                             <Switch id="sms" checked={sendSms} onCheckedChange={setSendSms} />
                         </div>
 
-                        <div className="flex justify-start gap-4 items-center">
+                        <div className="flex justify-start gap-4 items-center flex-wrap">
                             <Label htmlFor="email">Send Email</Label>
                             <select name="sms-time" id="">
                                 {[...Array(24)].map((_, i) => (
@@ -171,7 +171,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                         <p className="bg-red-100 py-2 px-3 rounded-lg text-red-600 text-sm">
                             if you choose the blank option, and set the frequency to 4 months, the message will be sent every 4 months from the creation date of the automation
                         </p>
-                        <div className="flex justify-start gap-4 items-center">
+                        <div className="flex justify-start gap-4 items-center flex-wrap">
                             <Label htmlFor="businessHours">Send During Business Hours</Label>
                             <Switch
                                 id="businessHours"
@@ -180,7 +180,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                             />
                         </div>
 
-                        <div className="flex justify-end gap-2 pt-4">
+                        <div className="flex justify-end gap-2 pt-4 flex-wrap">
                             {/* delete button */}
                             <Button
                                 variant="destructive"
@@ -190,23 +190,23 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                                     onDelete();
                                 }}
                             >
-                                Delete Automation
+                                Delete <span className="md:inline hidden">Automation</span>
                             </Button>
 
                             <Button variant="outline" onClick={handleClose}>Cancel</Button>
                             {/* <Button variant="secondary" onClick={() => setStep("preview")}>Toggle Preview</Button> */}
                             <Button
                                 disabled={!sendSms && !sendEmail}
-                                onClick={handleNext}>Review Message</Button>
+                                onClick={handleNext}>Review <span className="md:inline hidden">Message</span></Button>
                         </div>
                     </div>
                 )}
 
                 {step === "review" && (
-                    <div className="flex flex-col gap-6 pt-4">
+                    <div className="flex lg:h-auto h-[75vh] overflow-y-auto flex-col gap-6 pt-4">
                         {/* Left: Editor */}
-                        <div className="flex md:flex-row flex-col justify-between items-start gap-3">
-                            <div className="form flex flex-col gap-3 w-full md:w-2/3">
+                        <div className="flex lg:flex-row flex-col justify-between items-start gap-10 lg:gap-3">
+                            <div className="form flex flex-col gap-3 w-full lg:w-2/3">
 
                                
                                 <div className="flex flex-col mt-2">
@@ -267,7 +267,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
 
 
                             {/* Right: Preview */}
-                            <div className="w-full md:w-1/3">
+                            <div className="w-full lg:w-1/3">
                                 {/* <Label className="mb-2 block">Message Preview</Label> */}
                                 {/* <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm min-h-[200px]">
                                     <div className="text-sm text-gray-700 whitespace-pre-wrap">
@@ -276,7 +276,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                                 </div> */}
 
                                 {
-                                    toggledView === "sms" ? <div className="w-[270px] ml-auto h-[500px] border-6 border-b-12 border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-4 pb-2 flex flex-col justify-end overflow-hidden">
+                                    toggledView === "sms" ? <div className="w-[270px] lg:mr-0 mr-auto ml-auto h-[500px] border-6 border-b-12 border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-4 pb-2 flex flex-col justify-end overflow-hidden">
                                         {/* Notch */}
                                         <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner">
                                             <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>

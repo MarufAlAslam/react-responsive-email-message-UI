@@ -96,15 +96,15 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
 
     return (
         <Dialog open={open} onOpenChange={onClose}>
-            <DialogContent className="md:max-w-5xl md:min-w-5xl md:h-auto h-[90vh] overflow-y-auto">
-                <DialogHeader>
+            <DialogContent className="lg:max-w-5xl lg:min-w-5xl md:min-w-full min-w-[95%] max-w-full lg:w-full w-[95vw] md:h-auto h-[90vh] overflow-y-auto">
+                <DialogHeader className="w-full text-left">
                     <DialogTitle>
                         {step === "settings" ? "Create Automation" : "Review Message"}
                     </DialogTitle>
                 </DialogHeader>
 
                 {step === "settings" && (
-                    <div className="space-y-4 py-4">
+                    <div className="space-y-4 py-4 w-full">
                         <div className="flex flex-col">
                             <Label htmlFor="automationTitle">Automation Name</Label>
                             <input
@@ -132,7 +132,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                        <div className="flex justify-start gap-4 items-center">
+                        <div className="flex justify-start gap-4 items-center flex-wrap">
                             <Label htmlFor="sms">Send SMS</Label>
                             <select name="sms-time" id="">
                                 {[...Array(24)].map((_, i) => (
@@ -158,7 +158,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                             <Switch id="sms" checked={sendSms} onCheckedChange={setSendSms} />
                         </div>
 
-                        <div className="flex justify-start gap-4 items-center">
+                        <div className="flex justify-start gap-4 items-center flex-wrap">
                             <Label htmlFor="email">Send Email</Label>
                             <select name="sms-time" id="">
                                 {[...Array(24)].map((_, i) => (
@@ -187,7 +187,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                         <p className="bg-red-100 py-2 px-3 rounded-lg text-red-600 text-sm">
                             if you choose the blank option, and set the frequency to 4 months, the message will be sent every 4 months from the creation date of the automation
                         </p>
-                        <div className="flex justify-start gap-4 items-center">
+                        <div className="flex justify-start gap-4 items-center flex-wrap">
                             <Label htmlFor="businessHours">Send During Business Hours</Label>
                             <Switch
                                 id="businessHours"
@@ -207,10 +207,10 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                 )}
 
                 {step === "review" && (
-                    <div className="flex flex-col gap-6 pt-4">
+                    <div className="flex overflow-x-hidden lg:h-auto h-[75vh] overflow-y-auto flex-col gap-6 pt-4">
                         {/* Left: Editor */}
-                        <div className="flex md:flex-row flex-col justify-between items-start gap-3">
-                            <div className="form flex flex-col gap-3 w-full md:w-2/3">
+                        <div className="flex lg:flex-row flex-col justify-between items-start gap-10 lg:gap-3">
+                            <div className="form flex flex-col gap-3 w-full lg:w-2/3">
 
                                
                                 <div className="flex flex-col mt-2">
@@ -268,10 +268,8 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
 
 
                             </div>
-
-
                             {/* Right: Preview */}
-                            <div className="w-full md:w-1/3">
+                            <div className="w-full lg:w-1/3">
                                 {/* <Label className="mb-2 block">Message Preview</Label> */}
                                 {/* <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm min-h-[200px]">
                                     <div className="text-sm text-gray-700 whitespace-pre-wrap">
@@ -280,7 +278,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                 </div> */}
 
                                 {
-                                    toggledView === "sms" ? <div className="w-[270px] ml-auto h-[500px] border-6 border-b-12 border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-4 pb-2 flex flex-col justify-end overflow-hidden">
+                                    toggledView === "sms" ? <div className="md:w-[270px] w-full lg:mr-0 mr-auto ml-auto h-[500px] border-6 border-b-12 border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] p-4 pb-2 flex flex-col justify-end overflow-hidden">
                                         {/* Notch */}
                                         <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner">
                                             <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>
@@ -297,7 +295,7 @@ const CreateAutomationModal: React.FC<Props> = ({ open, onClose, onCreate }) => 
                                         <div className="widget-button w-[60px] rounded-4xl mt-4 mx-auto h-[4px] bg-gray-400"></div>
                                     </div>
                                         :
-                                        <div className="w-[270px] ml-auto pt-6 h-[500px] border-[6px] border-b-[12px] border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col">
+                                        <div className="md:w-[270px] w-full ml-auto pt-6 h-[500px] border-[6px] border-b-[12px] border-black relative rounded-3xl bg-white shadow-[0_10px_30px_rgba(0,0,0,0.3)] overflow-hidden flex flex-col">
                                             <div className="notch h-[15px] w-[100px] bg-black absolute top-0 left-1/2 -translate-x-1/2 rounded-b-xl shadow-inner z-10">
                                                 <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-2/3 -translate-x-2/3 rounded-full shadow-sm"></div>
                                                 <div className="camera-hole h-[7px] w-[7px] bg-white absolute z-10 top-[2px] left-1/3 -translate-x-1/3 rounded-full shadow-sm"></div>
