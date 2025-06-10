@@ -80,7 +80,7 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
 
     return (
         <Dialog open={open} onOpenChange={onClose}>
-            <DialogContent className="lg:max-w-5xl lg:min-w-5xl min-w-[95%] max-w-full lg:w-full w-[95vw] md:h-auto h-[90vh] overflow-y-auto">
+            <DialogContent className="lg:max-w-5xl lg:min-w-5xl md:min-w-full min-w-[97%] max-w-full lg:w-full w-[97vw] md:h-auto h-[90vh] overflow-y-auto md:p-5 p-2">
                 <DialogHeader className="text-left">
                     <DialogTitle>
                         {step === "settings" ? "Edit Automation" : "Review Message"}
@@ -125,13 +125,13 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                                     </option>
                                 ))}
                             </select>
-                            <select name="period" id="">
+                            <select name="period" className="md:w-auto w-[50px]" id="">
                                 <option value="hours">Hours</option>
                                 <option value="days">Days</option>
                                 <option value="weeks">Weeks</option>
                                 <option value="months">Months</option>
                             </select>
-                            <select name="name" id="">
+                            <select name="name" className="md:w-auto w-[50px]" id="">
                                 <option value=""></option>
                                 <option value="last-visit">After Last Visit</option>
                                 <option value="last-invoice">After Last Invoice</option>
@@ -151,13 +151,13 @@ const EditAutomationModal: React.FC<Props> = ({ open, onClose,
                                     </option>
                                 ))}
                             </select>
-                            <select name="period" id="">
+                            <select name="period" className="md:w-auto w-[50px]" id="">
                                 <option value="hours">Hours</option>
                                 <option value="days">Days</option>
                                 <option value="weeks">Weeks</option>
                                 <option value="months">Months</option>
                             </select>
-                            <select name="name" id="">
+                            <select name="name" className="md:w-auto w-[50px]" id="">
                                 <option value=""></option>
                                 <option value="last-visit">After Last Visit</option>
                                 <option value="last-invoice">After Last Invoice</option>
